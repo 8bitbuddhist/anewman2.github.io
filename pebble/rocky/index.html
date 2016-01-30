@@ -22,10 +22,6 @@
     <div class='item-container'>
       <div class='item-container-header'>ownCloud Configuration</div>
       <div class='item-container-content'>
-		<label class="item">
-		  Use HTTPS?
-		  <input id="oc_use_https" type="checkbox" class="item-toggle" name="oc_use_https" checked>
-		</label>
         <label class='item'>
           <div class="item-input-wrapper">
 		    <input id="oc_username" type="text" class="item-input" name="oc_username" placeholder="Username">
@@ -38,12 +34,23 @@
 		</label>
 		<label class="item">
 		  <div class="item-input-wrapper">
-		    <input id="oc_url" type="text" class="item-input" name="oc_url" placeholder="Server Address (e.g. myServer/owncloud)">
+		    <input id="oc_url" type="text" class="item-input" name="oc_url" placeholder="Server Address (e.g. https://myServer/owncloud)">
 		  </div>
 		</label>
 		<label class='item'>
           <div class="item-input-wrapper">
 		    <input id="oc_calendar" type="text" class="item-input" name="oc_calendar" placeholder="Calendar Name (e.g. myCalendar)">
+		  </div>
+        </label>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>OpenWeatherMap Configuration</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          <div class="item-input-wrapper">
+		    <input id="owm_api_key" type="text" class="item-input" name="owm_api_key" placeholder="OpenWeatherMap API key">
 		  </div>
         </label>
       </div>
@@ -57,18 +64,18 @@
   </body>
   <script type="text/javascript">
   function getConfigData() {
-  	var oc_use_https = document.getElementById('oc_use_https');
   	var oc_url = document.getElementById('oc_url');
     var oc_username = document.getElementById('oc_username');
     var oc_password = document.getElementById('oc_password');
     var oc_calendar = document.getElementById('oc_calendar');
+    var owm_api_key = document.getElementById('owm_api_key');
  
     var options = {
-      'oc_use_https': oc_use_https.checked,
       'oc_url': oc_url.value,
       'oc_username': encodeURIComponent(oc_username.value),
       'oc_password': encodeURIComponent(oc_password.value),
       'oc_calendar': oc_calendar.value
+      'owm_api_key': owm_api_key.value
     };
 	
     // Save for next launch
@@ -105,11 +112,11 @@
   });
 
   (function() {
-  	var oc_use_https = document.getElementById('oc_use_https');
     var oc_url = document.getElementById('oc_url');
     var oc_username = document.getElementById('oc_username');
     var oc_password = document.getElementById('oc_password');
     var oc_calendar = document.getElementById('oc_calendar');
+    var owm_api_key = document.getElementById('owm_api_key');
     
     var settings = decodeURIComponent(location.hash);
     settings = JSON.parse(settings.substring(settings.indexOf("{")));
@@ -120,11 +127,11 @@
     oc_username.value = getQueryParam('oc_username');
     oc_password.value = getQueryParam('oc_password');
     oc_calendar.value = getQueryParam('oc_calendar');*/
-    oc_use_https.checked = settings.oc_use_https;
     oc_url.value = settings.oc_url;
     oc_username.value = settings.oc_username;
     oc_password.value = settings.oc_password;
     oc_calendar.value = settings.oc_calendar;
+    owm_api_key.value = settings.owm_api_key;
   })();
   </script>
 </html>
